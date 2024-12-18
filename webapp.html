@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riddle Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            background: linear-gradient(135deg, rgb(2, 79, 22), #0ecb0e);
+            color: #333;
+        }
+        .top-text {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 18px;
+            z-index: 1000;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .image-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        img {
+            border: 5px solid green;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .riddler-text {
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            transform: translateY(-50%);
+            margin-left: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .riddler-text::before {
+            content: '→';
+            margin-right: 5px;
+            color: #333;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            background-color: #333;
+            color: white;
+            border-radius: 0;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: 'Courier New', Courier, monospace;
+            text-transform: uppercase;
+            letter-spacing: 2px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        button:hover {
+            background-color: #555;
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        .riddle {
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0;
+        }
+        .riddle.show {
+            opacity: 1;
+        }
+        .counter {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        a:hover {
+            font-size: larger;
+            text-decoration: underline;
+        }
+
+        a:visited {
+            color: rgb(23, 238, 70);
+        }
+
+        .none {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-text">Click the button below if you want to experience the <span class="bold">thrill of a lifetime.</span>If you'd rather not, go back <a href="scratch.html" class="none">here.</a></div>
+    <div class="image-container">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTrDf04Rm4L32vekf9SeQZ5nlm1oDrJutvjA&s" alt="Fun Image">
+        <div class="riddler-text">The Riddler</div>
+    </div>
+    <div class="container">
+        <h1>Riddle Generator</h1>
+        <p id="riddle" class="riddle">Click the button to get a riddle!</p>
+        <button onclick="generateRiddle()">Get Riddle</button>
+        <div class="counter">Riddles generated: <span id="riddleCount">0</span></div>
+    </div>
+
+    <script>
+        const riddles = [
+            "What has keys but can't open locks? <b>A piano.</b>",
+            "What has a head, a tail, is brown, and has no legs? <b>A penny.</b>",
+            "What comes once in a minute, twice in a moment, but never in a thousand years? <b>The letter 'M'.</b>",
+            "I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I? <b>An Echo.</b>",
+            "I have branches, but no fruit, trunk, or leaves. What am I? <b>A Bank.</b>",
+            "You see me once in June, twice in November, but not at all in May. What am I? <b>The Letter 'E'.</b>",
+            "I’m light as a feather, yet the strongest man can’t hold me for much longer than a minute. What am I? <b>Breath.</b>",
+            "I’m tall when I’m young, and I’m short when I’m old. What am I? <b>A Candle.</b>",
+            "What has many teeth, but can’t bite? <b>A Comb.</b>",
+            "The more you take, the more you leave behind. What am I? <b>Footsteps.</b>"
+        ];
+
+        let riddleCount = 0;
+
+        function generateRiddle() {
+            const randomIndex = Math.floor(Math.random() * riddles.length);
+            const riddleElement = document.getElementById('riddle');
+            riddleElement.classList.remove('show');
+            setTimeout(() => {
+                riddleElement.innerHTML = riddles[randomIndex];
+                riddleElement.classList.add('show');
+            }, 100);
+            riddleCount++;
+            document.getElementById('riddleCount').innerText = riddleCount;
+        }
+    </script>
+</body>
+</html>
